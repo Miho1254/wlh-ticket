@@ -14,9 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
-
     <style>
-      /* ===== THEME TOKENS ===== */
       :root {
         --ink: #1d1d1f;
         --muted: #6e6e73;
@@ -33,13 +31,11 @@
         --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.14);
         --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 60%, white);
         --link: #0a84ff;
-
         --footer-bg: #121215;
         --footer-fg: #ffffff;
         --footer-muted: #c9c9cf;
         --footer-border: rgba(255, 255, 255, 0.18);
-
-        --nav-h: 60px; /* nhớ sync với .nav height */
+        --nav-h: 60px;
       }
       html[data-theme="dark"] {
         --ink: #f5f5f7;
@@ -57,7 +53,6 @@
         --link: #66aaff;
       }
 
-      /* ===== BASE ===== */
       * {
         box-sizing: border-box;
       }
@@ -113,10 +108,26 @@
       .muted {
         color: var(--muted);
       }
-      .lead {
-        color: var(--muted);
-        max-width: 680px;
-        margin: 0 auto 30px;
+      .center {
+        text-align: center;
+      }
+      .mb-18 {
+        margin-bottom: 18px;
+      }
+      .mb-22 {
+        margin-bottom: 22px;
+      }
+      .mb-26 {
+        margin-bottom: 26px;
+      }
+      .semibold {
+        font-weight: 600;
+      }
+      .ink {
+        color: var(--ink);
+      }
+      .bg-2 {
+        background: var(--bg-2);
       }
 
       .card {
@@ -187,11 +198,11 @@
         width: min(560px, 92vw);
       }
 
-      /* ===== NAV ===== */
+      /* NAV */
       .nav {
         position: sticky;
         top: 0;
-        z-index: 10;
+        z-index: 20;
         background: color-mix(in oklab, var(--bg) 92%, transparent);
         backdrop-filter: saturate(180%) blur(14px);
         border-bottom: 1px solid var(--border);
@@ -202,26 +213,36 @@
         justify-content: space-between;
         height: var(--nav-h);
       }
-      .nav a {
+      .brand {
         color: inherit;
+        text-decoration: none;
+        font-weight: 800;
       }
       .nav a:hover,
       .nav a:focus-visible {
         text-decoration: none;
       }
-      .nav ul {
+      .nav-desktop {
+        display: flex;
+      }
+      .nav-links {
         display: flex;
         gap: 8px;
         list-style: none;
         margin: 0;
         padding: 0;
       }
-      .nav .link {
+      .link {
         padding: 8px 12px;
         border-radius: 8px;
       }
-      .nav .link:hover {
+      .link:hover {
         background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
       .theme-toggle {
         display: inline-flex;
@@ -259,12 +280,68 @@
         transform: translateX(14px);
         background: #fff;
       }
+      .menu-toggle {
+        display: none;
+        border: 1px solid var(--border);
+        background: var(--elev);
+        border-radius: 10px;
+        padding: 8px;
+        cursor: pointer;
+      }
+      /* Mobile drawer */
+      .nav-mobile {
+        display: none;
+        flex-direction: column;
+        padding: 10px 22px 16px;
+        gap: 8px;
+        border-top: 1px solid var(--border);
+        background: var(--elev);
+      }
+      .nav-mobile.open {
+        display: flex;
+        animation: slideDown 0.18s ease;
+      }
+      .m-link {
+        padding: 10px;
+        border-radius: 8px;
+        color: inherit;
+        text-decoration: none;
+      }
+      .m-link:hover {
+        background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
+      }
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-desktop {
+          display: none;
+        }
+        .menu-toggle {
+          display: inline-flex;
+        }
+      }
 
-      /* ===== KPI rows ===== */
+      /* KPI */
+      .kpi-header {
+        text-align: center;
+        background: var(--bg-2);
+        border-bottom: 1px solid var(--border);
+      }
+      .kpi-header .sub {
+        max-width: 560px;
+        margin: 6px auto 0;
+      }
       .kpi {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        border-top: 1px solid var(--border);
         background: var(--elev);
       }
       .kpi > div {
@@ -274,6 +351,18 @@
       }
       .kpi > div:last-child {
         border-right: 0;
+      }
+      .kpi-mid {
+        border-left: 1px solid var(--border);
+        border-right: 1px solid var(--border);
+      }
+      .kpi .label {
+        letter-spacing: 0.16em;
+        font-weight: 700;
+      }
+      .kpi .kpi-num {
+        font-size: 40px;
+        font-weight: 700;
       }
       @media (max-width: 900px) {
         .kpi {
@@ -286,9 +375,13 @@
         .kpi > div:last-child {
           border-bottom: 0;
         }
+        .kpi-mid {
+          border-left: 0;
+          border-right: 0;
+        }
       }
 
-      /* ===== HERO — FULL SCREEN ALWAYS ===== */
+      /* HERO full-screen */
       .hero {
         padding: 0;
       }
@@ -296,17 +389,15 @@
         position: relative;
         width: 100vw;
         margin-left: 50%;
-        transform: translateX(-50%); /* full-bleed */
+        transform: translateX(-50%);
         background: var(--bg-2);
       }
       .hero-media {
         width: 100%;
-        height: calc(
-          100dvh - var(--nav-h)
-        ); /* ưu tiên unit dvh (mobile safe) */
-        height: calc(100svh - var(--nav-h)); /* Safari iOS 16 fallback */
-        height: calc(100vh - var(--nav-h)); /* fallback chung */
-        min-height: 480px; /* đừng quá thấp ở màn nhỏ */
+        height: calc(100dvh - var(--nav-h));
+        height: calc(100svh - var(--nav-h));
+        height: calc(100vh - var(--nav-h));
+        min-height: 480px;
         position: relative;
         overflow: hidden;
       }
@@ -315,10 +406,12 @@
         inset: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover; /* luôn lấp đầy khung */
-        object-position: center; /* focus center, đổi nếu cần */
+        object-fit: cover;
+        object-position: center;
         display: block;
-        filter: brightness(50%);
+        opacity: 0;
+        animation: fadeIn 0.6s ease 0.05s forwards;
+        filter: brightness(0.5);
       }
       .hero-overlay {
         position: absolute;
@@ -358,8 +451,13 @@
         justify-content: center;
         flex-wrap: wrap;
       }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
 
-      /* ===== TICKETS (name + price + benefits) ===== */
+      /* Tickets */
       .tickets-grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -395,32 +493,30 @@
         box-shadow: var(--shadow-lg);
       }
 
+      /* MOBILE-LIKE STACK ON ALL BREAKPOINTS */
       .ticket-row {
-        display: grid;
-        grid-template-columns: 1fr auto; /* title | price */
-        align-items: center;
-        gap: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
         min-width: 0;
       }
-      @media (max-width: 420px) {
-        .ticket-row {
-          grid-template-columns: 1fr;
-          gap: 8px;
-          align-items: start;
-        }
-      }
-
       .ticket-title {
         font-weight: 800;
         font-size: clamp(18px, 2.1vw, 22px);
         line-height: 1.2;
-        white-space: normal;
+        overflow-wrap: anywhere;
+        text-wrap: balance; /* tránh tràn chữ dài */
       }
       .ticket-price {
-        white-space: nowrap;
-        font-size: clamp(22px, 2.6vw, 36px);
         font-weight: 800;
+        line-height: 1.1;
+        font-size: clamp(24px, 4vw, 36px);
+        white-space: normal; /* cho phép xuống dòng nếu cần */
       }
+      .ticket-price .unit {
+        white-space: nowrap;
+      } /* giữ VNĐ dính số */
 
       .ticket-badge {
         position: absolute;
@@ -469,7 +565,7 @@
         background: color-mix(in oklab, var(--bg) 85%, var(--ink) 6%);
       }
 
-      /* ===== SCHEDULE ===== */
+      /* Schedule */
       .schedule .row {
         display: grid;
         grid-template-columns: 120px 1fr;
@@ -487,7 +583,7 @@
         }
       }
 
-      /* ===== FOOTER (fixed dark) ===== */
+      /* Footer */
       .site-footer {
         background: var(--footer-bg);
         color: var(--footer-fg);
@@ -515,36 +611,70 @@
           animation: none !important;
           scroll-behavior: auto;
         }
+        .hero-media img {
+          opacity: 1 !important;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- ===== NAVBAR ===== -->
+    <!-- NAVBAR -->
     <header class="nav">
       <div class="container nav-inner">
-        <a href="#" style="text-decoration: none">VTuber Event</a>
-        <nav aria-label="Main">
-          <ul>
+        <a href="#" class="brand">VTuber Event</a>
+
+        <nav aria-label="Main" class="nav-desktop">
+          <ul class="nav-links">
             <li><a class="link" href="#event">Sự kiện</a></li>
             <li><a class="link" href="#tickets">Vé</a></li>
             <li><a class="link" href="#schedule">Lịch trình</a></li>
           </ul>
         </nav>
-        <!-- MANUAL DARK MODE TOGGLE -->
-        <label class="theme-toggle" title="Chuyển giao diện">
-          <span class="muted" aria-hidden="true">🌞</span>
-          <input id="themeSwitch" type="checkbox" aria-label="Dark mode" />
-          <span class="muted" aria-hidden="true">🌚</span>
-        </label>
+
+        <div class="nav-actions">
+          <label class="theme-toggle" title="Chuyển giao diện">
+            <span class="muted" aria-hidden="true">🌞</span>
+            <input id="themeSwitch" type="checkbox" aria-label="Dark mode" />
+            <span class="muted" aria-hidden="true">🌚</span>
+          </label>
+          <button
+            class="menu-toggle"
+            id="menuBtn"
+            aria-label="Mở menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h18M3 12h18M3 18h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
+
+      <nav id="mobileMenu" class="nav-mobile" aria-label="Mobile">
+        <a class="m-link" href="#event">Sự kiện</a>
+        <a class="m-link" href="#tickets">Vé</a>
+        <a class="m-link" href="#schedule">Lịch trình</a>
+      </nav>
     </header>
 
     <main id="main">
-      <!-- ===== HERO — FULL SCREEN ===== -->
+      <!-- HERO FULL SCREEN -->
       <section class="hero" aria-label="Hero">
         <div class="hero-banner">
           <div class="hero-media">
-            <!-- THAY URL này bằng ảnh banner của bạn -->
+            <!-- THAY URL ảnh banner ở đây -->
             <img
               src="https://media.discordapp.net/attachments/1042324690393374820/1404050776677941279/hero.webp?ex=6899c7af&is=6898762f&hm=625454a7939e517132d85631a2451637447d3c6120642c5383d9c61142f3614c&=&format=webp"
               alt="VTuber Offline Event banner"
@@ -572,53 +702,35 @@
         </div>
       </section>
 
-      <!-- ===== EVENT INFO ===== -->
+      <!-- EVENT INFO -->
       <section id="event" class="section" aria-label="Thông tin sự kiện">
         <div class="container">
           <div class="card" style="overflow: hidden">
-            <div
-              class="card pad"
-              style="
-                background: var(--bg-2);
-                border-bottom: 1px solid var(--border);
-                text-align: center;
-              "
-            >
+            <div class="card pad kpi-header">
               <span class="pill">OFFLINE EVENT 2024</span>
-              <h3 style="margin-top: 14px">VTuber Meet &amp; Greet</h3>
-              <p class="muted" style="max-width: 560px; margin: 6px auto 0">
+              <h3>VTuber Meet &amp; Greet</h3>
+              <p class="muted sub">
                 Gặp gỡ trực tiếp với các VTuber nổi tiếng.
               </p>
             </div>
             <div class="kpi">
               <div>
-                <div style="font-size: 40px; font-weight: 700">15</div>
+                <div class="kpi-num">15</div>
                 <div class="muted">
-                  Tháng 12, 2024 — CN<br /><strong style="color: var(--ink)"
+                  Tháng 12, 2024 — CN<br /><strong class="ink"
                     >9:00–18:00</strong
                   >
                 </div>
               </div>
-              <div
-                style="
-                  border-left: 1px solid var(--border);
-                  border-right: 1px solid var(--border);
-                "
-              >
-                <div
-                  class="muted"
-                  style="letter-spacing: 0.16em; font-weight: 700"
-                >
-                  ĐỊA ĐIỂM
-                </div>
-                <h3 style="margin: 8px 0 2px">Trung tâm Hội nghị</h3>
+              <div class="kpi-mid">
+                <div class="muted label">ĐỊA ĐIỂM</div>
+                <h3>Trung tâm Hội nghị</h3>
                 <p class="muted">Quận 1, TP.HCM</p>
               </div>
               <div>
-                <div style="font-size: 40px; font-weight: 700">500</div>
+                <div class="kpi-num">500</div>
                 <div class="muted">
-                  Sức chứa tối đa —
-                  <strong style="color: var(--ink)">Số lượng có hạn</strong>
+                  Sức chứa tối đa — <strong class="ink">Số lượng có hạn</strong>
                 </div>
               </div>
             </div>
@@ -626,22 +738,20 @@
         </div>
       </section>
 
-      <!-- ===== TICKETS ===== -->
+      <!-- TICKETS -->
       <section id="tickets" class="section" aria-label="Các gói vé">
         <div class="container tickets">
-          <h2 style="text-align: center; margin-bottom: 18px">Các gói vé</h2>
-          <p class="muted" style="text-align: center; margin-bottom: 26px">
+          <h2 class="center mb-18">Các gói vé</h2>
+          <p class="muted center mb-26">
             Chọn loại vé & thanh toán sẽ thực hiện ở trang mua vé.
           </p>
 
           <div class="tickets-grid" aria-label="Các gói vé">
-            <!-- BASIC -->
             <article class="ticket-option">
               <div class="ticket-row">
                 <div class="ticket-title">Vé Thường</div>
                 <div class="ticket-price">
-                  299.000
-                  <span class="muted" style="font-weight: 600">VNĐ</span>
+                  299.000&nbsp;<span class="muted semibold unit">VNĐ</span>
                 </div>
               </div>
               <ul class="benefits" aria-label="Quyền lợi">
@@ -652,14 +762,12 @@
               </ul>
             </article>
 
-            <!-- VIP -->
             <article class="ticket-option">
               <span class="ticket-badge">Phổ biến</span>
               <div class="ticket-row">
                 <div class="ticket-title">Vé VIP</div>
                 <div class="ticket-price">
-                  599.000
-                  <span class="muted" style="font-weight: 600">VNĐ</span>
+                  599.000&nbsp;<span class="muted semibold unit">VNĐ</span>
                 </div>
               </div>
               <ul class="benefits" aria-label="Quyền lợi">
@@ -678,13 +786,11 @@
               </ul>
             </article>
 
-            <!-- PREMIUM -->
             <article class="ticket-option">
               <div class="ticket-row">
                 <div class="ticket-title">Vé Premium</div>
                 <div class="ticket-price">
-                  999.000
-                  <span class="muted" style="font-weight: 600">VNĐ</span>
+                  999.000&nbsp;<span class="muted semibold unit">VNĐ</span>
                 </div>
               </div>
               <ul class="benefits" aria-label="Quyền lợi">
@@ -713,17 +819,10 @@
         </div>
       </section>
 
-      <!-- ===== SCHEDULE ===== -->
-      <section
-        id="schedule"
-        class="section"
-        style="background: var(--bg-2)"
-        aria-label="Lịch trình"
-      >
+      <!-- SCHEDULE -->
+      <section id="schedule" class="section bg-2" aria-label="Lịch trình">
         <div class="container">
-          <h2 style="text-align: center; margin-bottom: 22px">
-            Lịch trình sự kiện
-          </h2>
+          <h2 class="center mb-22">Lịch trình sự kiện</h2>
           <div class="card">
             <div class="schedule">
               <div class="row">
@@ -774,9 +873,9 @@
       </section>
     </main>
 
-    <!-- ===== FOOTER (dark fixed) ===== -->
+    <!-- FOOTER -->
     <footer class="section site-footer" aria-label="Footer">
-      <div class="container" style="text-align: center">
+      <div class="container center">
         <h3 style="margin: 0 0 6px">VTuber Event HCM</h3>
         <p class="muted">Sự kiện VTuber offline đầu tiên tại TP.HCM</p>
         <hr />
@@ -802,18 +901,56 @@
     </footer>
 
     <script>
-      // ===== THEME TOGGLE (manual) =====
+      // Theme toggle
       const htmlEl = document.documentElement;
       const themeSwitch = document.getElementById("themeSwitch");
       const saved = localStorage.getItem("theme");
       if (saved) {
         htmlEl.setAttribute("data-theme", saved);
-        themeSwitch.checked = saved === "dark";
+        if (themeSwitch) themeSwitch.checked = saved === "dark";
       }
-      themeSwitch.addEventListener("change", () => {
-        const mode = themeSwitch.checked ? "dark" : "light";
-        htmlEl.setAttribute("data-theme", mode);
-        localStorage.setItem("theme", mode);
+      if (themeSwitch) {
+        themeSwitch.addEventListener("change", () => {
+          const mode = themeSwitch.checked ? "dark" : "light";
+          htmlEl.setAttribute("data-theme", mode);
+          localStorage.setItem("theme", mode);
+        });
+      }
+
+      // Mobile menu
+      const menuBtn = document.getElementById("menuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      if (menuBtn && mobileMenu) {
+        const closeMenu = () => {
+          mobileMenu.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+        };
+        menuBtn.addEventListener("click", () => {
+          const open = mobileMenu.classList.toggle("open");
+          menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        mobileMenu
+          .querySelectorAll("a")
+          .forEach((a) => a.addEventListener("click", closeMenu));
+        document.addEventListener("click", (e) => {
+          if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+            closeMenu();
+          }
+        });
+      }
+
+      // Smooth scroll for in-page links
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const id = a.getAttribute("href");
+          if (id && id.length > 1) {
+            const el = document.querySelector(id);
+            if (el) {
+              e.preventDefault();
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
+        });
       });
     </script>
   </body>
