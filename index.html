@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>VTuber Offline Event — TP.HCM</title>
+    <meta
+      name="description"
+      content="Gặp gỡ VTuber tại TP.HCM. Talk show, mini games, meet & greet, quà độc quyền."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ===== THEME TOKENS ===== */
+      :root {
+        --ink: #1d1d1f;
+        --muted: #6e6e73;
+        --bg: #ffffff;
+        --bg-2: #f5f5f7;
+        --elev: #ffffff;
+        --blue: #007aff;
+        --blue-2: #0051d5;
+        --border: rgba(0, 0, 0, 0.12);
+        --border-strong: rgba(0, 0, 0, 0.18);
+        --radius: 12px;
+        --radius-lg: 20px;
+        --shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+        --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.14);
+        --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 60%, white);
+        --link: #0a84ff;
+
+        --footer-bg: #121215;
+        --footer-fg: #ffffff;
+        --footer-muted: #c9c9cf;
+        --footer-border: rgba(255, 255, 255, 0.18);
+
+        --nav-h: 60px; /* nhớ sync với .nav height */
+      }
+      html[data-theme="dark"] {
+        --ink: #f5f5f7;
+        --muted: #b7b7bd;
+        --bg: #0b0b0c;
+        --bg-2: #111114;
+        --elev: #121215;
+        --blue: #0a84ff;
+        --blue-2: #0066cc;
+        --border: rgba(255, 255, 255, 0.14);
+        --border-strong: rgba(255, 255, 255, 0.22);
+        --shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+        --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.7);
+        --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 65%, black);
+        --link: #66aaff;
+      }
+
+      /* ===== BASE ===== */
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Arial;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.55;
+        letter-spacing: -0.01em;
+        text-rendering: optimizeLegibility;
+        overflow-x: hidden;
+      }
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+      a:hover,
+      a:focus-visible {
+        text-decoration: underline;
+      }
+      .container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 22px;
+      }
+      .section {
+        padding: 72px 0;
+      }
+      h1 {
+        font-size: clamp(40px, 6vw, 80px);
+        line-height: 1.05;
+        margin: 0 0 10px;
+      }
+      h2 {
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.1;
+        margin: 0 0 18px;
+      }
+      h3 {
+        font-size: 22px;
+        margin: 0 0 8px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .lead {
+        color: var(--muted);
+        max-width: 680px;
+        margin: 0 auto 30px;
+      }
+
+      .card {
+        background: var(--elev);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+      .card.pad {
+        padding: 28px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 9px 14px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        font-size: 12px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 12px 18px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--ink);
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          background-color 0.2s ease,
+          border-color 0.2s ease;
+      }
+      .btn:focus-visible {
+        outline: none;
+        box-shadow: var(--focus);
+      }
+      .btn-primary {
+        background: var(--blue);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        background: var(--blue-2);
+      }
+      .btn-ghost {
+        border-color: var(--border);
+        background: color-mix(in oklab, var(--bg) 86%, var(--ink) 6%);
+      }
+      .btn-ghost:hover {
+        transform: translateY(-1px);
+      }
+      .cta-large {
+        font-size: 20px;
+        min-height: 56px;
+        padding: 16px 28px;
+      }
+      .cta-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 28px;
+      }
+      .cta-full {
+        width: min(560px, 92vw);
+      }
+
+      /* ===== NAV ===== */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: color-mix(in oklab, var(--bg) 92%, transparent);
+        backdrop-filter: saturate(180%) blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: var(--nav-h);
+      }
+      .nav a {
+        color: inherit;
+      }
+      .nav a:hover,
+      .nav a:focus-visible {
+        text-decoration: none;
+      }
+      .nav ul {
+        display: flex;
+        gap: 8px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav .link {
+        padding: 8px 12px;
+        border-radius: 8px;
+      }
+      .nav .link:hover {
+        background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
+      }
+      .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
+        cursor: pointer;
+        background: var(--elev);
+      }
+      .theme-toggle input {
+        appearance: none;
+        width: 34px;
+        height: 20px;
+        border-radius: 999px;
+        background: color-mix(in oklab, var(--bg-2) 60%, var(--ink) 8%);
+        position: relative;
+        outline: none;
+        border: 1px solid var(--border-strong);
+      }
+      .theme-toggle input:before {
+        content: "";
+        position: absolute;
+        inset: 2px auto auto 2px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--ink);
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+      .theme-toggle input:checked:before {
+        transform: translateX(14px);
+        background: #fff;
+      }
+
+      /* ===== KPI rows ===== */
+      .kpi {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid var(--border);
+        background: var(--elev);
+      }
+      .kpi > div {
+        padding: 30px;
+        text-align: center;
+        border-right: 1px solid var(--border);
+      }
+      .kpi > div:last-child {
+        border-right: 0;
+      }
+      @media (max-width: 900px) {
+        .kpi {
+          grid-template-columns: 1fr;
+        }
+        .kpi > div {
+          border-right: 0;
+          border-bottom: 1px solid var(--border);
+        }
+        .kpi > div:last-child {
+          border-bottom: 0;
+        }
+      }
+
+      /* ===== HERO — FULL SCREEN ALWAYS ===== */
+      .hero {
+        padding: 0;
+      }
+      .hero-banner {
+        position: relative;
+        width: 100vw;
+        margin-left: 50%;
+        transform: translateX(-50%); /* full-bleed */
+        background: var(--bg-2);
+      }
+      .hero-media {
+        width: 100%;
+        height: calc(
+          100dvh - var(--nav-h)
+        ); /* ưu tiên unit dvh (mobile safe) */
+        height: calc(100svh - var(--nav-h)); /* Safari iOS 16 fallback */
+        height: calc(100vh - var(--nav-h)); /* fallback chung */
+        min-height: 480px; /* đừng quá thấp ở màn nhỏ */
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-media img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* luôn lấp đầy khung */
+        object-position: center; /* focus center, đổi nếu cần */
+        display: block;
+        filter: brightness(50%);
+      }
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.45),
+          rgba(0, 0, 0, 0.25) 40%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero-content {
+        position: absolute;
+        left: 50%;
+        bottom: 6%;
+        transform: translateX(-50%);
+        width: min(1100px, 92vw);
+        color: #fff;
+        text-align: center;
+        padding: 0 22px;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+      }
+      .hero-title {
+        font-size: clamp(36px, 6vw, 72px);
+        line-height: 1.05;
+        margin: 0 0 10px;
+      }
+      .hero-sub {
+        font-size: clamp(16px, 2.8vw, 22px);
+        opacity: 0.9;
+        margin: 0 0 18px;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ===== TICKETS (name + price + benefits) ===== */
+      .tickets-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+      @media (max-width: 1024px) {
+        .tickets-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 20px;
+        }
+      }
+      @media (max-width: 640px) {
+        .tickets-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+      }
+
+      .ticket-option {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--radius-lg);
+        border: 1.5px solid var(--border);
+        background: var(--elev);
+        padding: 20px;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.2s ease;
+      }
+      .ticket-option:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .ticket-row {
+        display: grid;
+        grid-template-columns: 1fr auto; /* title | price */
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+      @media (max-width: 420px) {
+        .ticket-row {
+          grid-template-columns: 1fr;
+          gap: 8px;
+          align-items: start;
+        }
+      }
+
+      .ticket-title {
+        font-weight: 800;
+        font-size: clamp(18px, 2.1vw, 22px);
+        line-height: 1.2;
+        white-space: normal;
+      }
+      .ticket-price {
+        white-space: nowrap;
+        font-size: clamp(22px, 2.6vw, 36px);
+        font-weight: 800;
+      }
+
+      .ticket-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #fff;
+        background: var(--blue);
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+
+      .benefits {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background: var(--bg-2);
+        padding: 12px;
+        border-radius: 12px;
+      }
+      .benefits li {
+        list-style: none;
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+      }
+      .dot {
+        inline-size: 16px;
+        block-size: 16px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+      }
+      html[data-theme="dark"] .ticket-option {
+        background: var(--elev);
+        border-color: var(--border);
+      }
+      html[data-theme="dark"] .benefits {
+        background: color-mix(in oklab, var(--bg) 85%, var(--ink) 6%);
+      }
+
+      /* ===== SCHEDULE ===== */
+      .schedule .row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 16px;
+        padding: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+      .schedule time {
+        font-size: 22px;
+        font-weight: 700;
+      }
+      @media (max-width: 700px) {
+        .schedule .row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ===== FOOTER (fixed dark) ===== */
+      .site-footer {
+        background: var(--footer-bg);
+        color: var(--footer-fg);
+      }
+      .site-footer a {
+        color: var(--footer-fg);
+        text-decoration: none;
+      }
+      .site-footer a:hover,
+      .site-footer a:focus-visible {
+        text-decoration: underline;
+      }
+      .site-footer .muted {
+        color: var(--footer-muted);
+      }
+      .site-footer hr {
+        border: none;
+        border-top: 1px solid var(--footer-border);
+        margin: 24px 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== NAVBAR ===== -->
+    <header class="nav">
+      <div class="container nav-inner">
+        <a href="#" style="text-decoration: none">VTuber Event</a>
+        <nav aria-label="Main">
+          <ul>
+            <li><a class="link" href="#event">Sự kiện</a></li>
+            <li><a class="link" href="#tickets">Vé</a></li>
+            <li><a class="link" href="#schedule">Lịch trình</a></li>
+          </ul>
+        </nav>
+        <!-- MANUAL DARK MODE TOGGLE -->
+        <label class="theme-toggle" title="Chuyển giao diện">
+          <span class="muted" aria-hidden="true">🌞</span>
+          <input id="themeSwitch" type="checkbox" aria-label="Dark mode" />
+          <span class="muted" aria-hidden="true">🌚</span>
+        </label>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ===== HERO — FULL SCREEN ===== -->
+      <section class="hero" aria-label="Hero">
+        <div class="hero-banner">
+          <div class="hero-media">
+            <!-- THAY URL này bằng ảnh banner của bạn -->
+            <img
+              src="https://media.discordapp.net/attachments/1042324690393374820/1404050776677941279/hero.webp?ex=6899c7af&is=6898762f&hm=625454a7939e517132d85631a2451637447d3c6120642c5383d9c61142f3614c&=&format=webp"
+              alt="VTuber Offline Event banner"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+              <h1 class="hero-title">VTuber Offline Event</h1>
+              <p class="hero-sub">
+                Thành phố Hồ Chí Minh 2024 — Talk show, mini games, meet &amp;
+                greet, quà độc quyền.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary cta-large" href="#tickets"
+                  >Mua vé ngay</a
+                >
+                <a class="btn btn-ghost cta-large" href="#event"
+                  >Tìm hiểu thêm</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== EVENT INFO ===== -->
+      <section id="event" class="section" aria-label="Thông tin sự kiện">
+        <div class="container">
+          <div class="card" style="overflow: hidden">
+            <div
+              class="card pad"
+              style="
+                background: var(--bg-2);
+                border-bottom: 1px solid var(--border);
+                text-align: center;
+              "
+            >
+              <span class="pill">OFFLINE EVENT 2024</span>
+              <h3 style="margin-top: 14px">VTuber Meet &amp; Greet</h3>
+              <p class="muted" style="max-width: 560px; margin: 6px auto 0">
+                Gặp gỡ trực tiếp với các VTuber nổi tiếng.
+              </p>
+            </div>
+            <div class="kpi">
+              <div>
+                <div style="font-size: 40px; font-weight: 700">15</div>
+                <div class="muted">
+                  Tháng 12, 2024 — CN<br /><strong style="color: var(--ink)"
+                    >9:00–18:00</strong
+                  >
+                </div>
+              </div>
+              <div
+                style="
+                  border-left: 1px solid var(--border);
+                  border-right: 1px solid var(--border);
+                "
+              >
+                <div
+                  class="muted"
+                  style="letter-spacing: 0.16em; font-weight: 700"
+                >
+                  ĐỊA ĐIỂM
+                </div>
+                <h3 style="margin: 8px 0 2px">Trung tâm Hội nghị</h3>
+                <p class="muted">Quận 1, TP.HCM</p>
+              </div>
+              <div>
+                <div style="font-size: 40px; font-weight: 700">500</div>
+                <div class="muted">
+                  Sức chứa tối đa —
+                  <strong style="color: var(--ink)">Số lượng có hạn</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TICKETS ===== -->
+      <section id="tickets" class="section" aria-label="Các gói vé">
+        <div class="container tickets">
+          <h2 style="text-align: center; margin-bottom: 18px">Các gói vé</h2>
+          <p class="muted" style="text-align: center; margin-bottom: 26px">
+            Chọn loại vé & thanh toán sẽ thực hiện ở trang mua vé.
+          </p>
+
+          <div class="tickets-grid" aria-label="Các gói vé">
+            <!-- BASIC -->
+            <article class="ticket-option">
+              <div class="ticket-row">
+                <div class="ticket-title">Vé Thường</div>
+                <div class="ticket-price">
+                  299.000
+                  <span class="muted" style="font-weight: 600">VNĐ</span>
+                </div>
+              </div>
+              <ul class="benefits" aria-label="Quyền lợi">
+                <li><span class="dot">✓</span><span>Tham dự sự kiện</span></li>
+                <li><span class="dot">✓</span><span>Gặp gỡ VTuber</span></li>
+                <li><span class="dot">✓</span><span>Quà lưu niệm</span></li>
+                <li><span class="dot">✓</span><span>Ăn uống miễn phí</span></li>
+              </ul>
+            </article>
+
+            <!-- VIP -->
+            <article class="ticket-option">
+              <span class="ticket-badge">Phổ biến</span>
+              <div class="ticket-row">
+                <div class="ticket-title">Vé VIP</div>
+                <div class="ticket-price">
+                  599.000
+                  <span class="muted" style="font-weight: 600">VNĐ</span>
+                </div>
+              </div>
+              <ul class="benefits" aria-label="Quyền lợi">
+                <li>
+                  <span class="dot">✓</span
+                  ><span>Tất cả quyền lợi vé thường</span>
+                </li>
+                <li>
+                  <span class="dot">✓</span
+                  ><span>Chụp ảnh riêng với VTuber</span>
+                </li>
+                <li>
+                  <span class="dot">✓</span><span>Quà VIP độc quyền</span>
+                </li>
+                <li><span class="dot">✓</span><span>Chỗ ngồi ưu tiên</span></li>
+              </ul>
+            </article>
+
+            <!-- PREMIUM -->
+            <article class="ticket-option">
+              <div class="ticket-row">
+                <div class="ticket-title">Vé Premium</div>
+                <div class="ticket-price">
+                  999.000
+                  <span class="muted" style="font-weight: 600">VNĐ</span>
+                </div>
+              </div>
+              <ul class="benefits" aria-label="Quyền lợi">
+                <li>
+                  <span class="dot">✓</span><span>Tất cả quyền lợi vé VIP</span>
+                </li>
+                <li>
+                  <span class="dot">✓</span
+                  ><span>Meet &amp; Greet riêng tư</span>
+                </li>
+                <li>
+                  <span class="dot">✓</span><span>Ký tặng độc quyền</span>
+                </li>
+                <li>
+                  <span class="dot">✓</span><span>Goodie bag cao cấp</span>
+                </li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="cta-wrap">
+            <a class="btn btn-primary cta-large cta-full" href="/mua-ve"
+              >Mua vé</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SCHEDULE ===== -->
+      <section
+        id="schedule"
+        class="section"
+        style="background: var(--bg-2)"
+        aria-label="Lịch trình"
+      >
+        <div class="container">
+          <h2 style="text-align: center; margin-bottom: 22px">
+            Lịch trình sự kiện
+          </h2>
+          <div class="card">
+            <div class="schedule">
+              <div class="row">
+                <time datetime="2024-12-15T09:00:00+07:00">09:00</time>
+                <div>
+                  <h3>Khai mạc</h3>
+                  <p class="muted">Chào mừng &amp; Giới thiệu</p>
+                </div>
+              </div>
+              <div class="row">
+                <time datetime="2024-12-15T10:30:00+07:00">10:30</time>
+                <div>
+                  <h3>Talk Show</h3>
+                  <p class="muted">Trò chuyện với VTuber</p>
+                </div>
+              </div>
+              <div class="row">
+                <time datetime="2024-12-15T12:00:00+07:00">12:00</time>
+                <div>
+                  <h3>Nghỉ trưa</h3>
+                  <p class="muted">Ăn uống &amp; Networking</p>
+                </div>
+              </div>
+              <div class="row">
+                <time datetime="2024-12-15T14:00:00+07:00">14:00</time>
+                <div>
+                  <h3>Mini Games</h3>
+                  <p class="muted">Hoạt động tương tác</p>
+                </div>
+              </div>
+              <div class="row">
+                <time datetime="2024-12-15T16:00:00+07:00">16:00</time>
+                <div>
+                  <h3>Meet &amp; Greet</h3>
+                  <p class="muted">Chụp ảnh &amp; Ký tặng</p>
+                </div>
+              </div>
+              <div class="row" style="border-bottom: 0">
+                <time datetime="2024-12-15T17:30:00+07:00">17:30</time>
+                <div>
+                  <h3>Bế mạc</h3>
+                  <p class="muted">Tổng kết &amp; Trao giải</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER (dark fixed) ===== -->
+    <footer class="section site-footer" aria-label="Footer">
+      <div class="container" style="text-align: center">
+        <h3 style="margin: 0 0 6px">VTuber Event HCM</h3>
+        <p class="muted">Sự kiện VTuber offline đầu tiên tại TP.HCM</p>
+        <hr />
+        <nav
+          aria-label="Mạng xã hội"
+          style="
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+          "
+        >
+          <a href="#" rel="noopener">Facebook</a>
+          <a href="#" rel="noopener">Instagram</a>
+          <a href="#" rel="noopener">Twitter</a>
+          <a href="#" rel="noopener">YouTube</a>
+        </nav>
+        <hr />
+        <small class="muted"
+          >© 2024 VTuber Event HCM. All rights reserved.</small
+        >
+      </div>
+    </footer>
+
+    <script>
+      // ===== THEME TOGGLE (manual) =====
+      const htmlEl = document.documentElement;
+      const themeSwitch = document.getElementById("themeSwitch");
+      const saved = localStorage.getItem("theme");
+      if (saved) {
+        htmlEl.setAttribute("data-theme", saved);
+        themeSwitch.checked = saved === "dark";
+      }
+      themeSwitch.addEventListener("change", () => {
+        const mode = themeSwitch.checked ? "dark" : "light";
+        htmlEl.setAttribute("data-theme", mode);
+        localStorage.setItem("theme", mode);
+      });
+    </script>
+  </body>
+</html>

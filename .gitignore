@@ -1,0 +1,8 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (nếu sau này bạn thêm tooling)
+node_modules/
+dist/
+
