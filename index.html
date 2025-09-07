@@ -1,957 +1,1133 @@
 <!doctype html>
 <html lang="vi" data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>VTuber Offline Event — TP.HCM</title>
-    <meta
-      name="description"
-      content="Gặp gỡ VTuber tại TP.HCM. Talk show, mini games, meet & greet, quà độc quyền."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --ink: #1d1d1f;
-        --muted: #6e6e73;
-        --bg: #ffffff;
-        --bg-2: #f5f5f7;
-        --elev: #ffffff;
-        --blue: #007aff;
-        --blue-2: #0051d5;
-        --border: rgba(0, 0, 0, 0.12);
-        --border-strong: rgba(0, 0, 0, 0.18);
-        --radius: 12px;
-        --radius-lg: 20px;
-        --shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-        --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.14);
-        --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 60%, white);
-        --link: #0a84ff;
-        --footer-bg: #121215;
-        --footer-fg: #ffffff;
-        --footer-muted: #c9c9cf;
-        --footer-border: rgba(255, 255, 255, 0.18);
-        --nav-h: 60px;
-      }
-      html[data-theme="dark"] {
-        --ink: #f5f5f7;
-        --muted: #b7b7bd;
-        --bg: #0b0b0c;
-        --bg-2: #111114;
-        --elev: #121215;
-        --blue: #0a84ff;
-        --blue-2: #0066cc;
-        --border: rgba(255, 255, 255, 0.14);
-        --border-strong: rgba(255, 255, 255, 0.22);
-        --shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
-        --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.7);
-        --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 65%, black);
-        --link: #66aaff;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        margin: 0;
-        font-family:
-          "Inter",
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          Arial;
-        background: var(--bg);
-        color: var(--ink);
-        line-height: 1.55;
-        letter-spacing: -0.01em;
-        text-rendering: optimizeLegibility;
-        overflow-x: hidden;
-      }
-      a {
-        color: var(--link);
-        text-decoration: none;
-      }
-      a:hover,
-      a:focus-visible {
-        text-decoration: underline;
-      }
-      .container {
-        max-width: 1100px;
-        margin: auto;
-        padding: 0 22px;
-      }
-      .section {
-        padding: 72px 0;
-      }
-      h1 {
-        font-size: clamp(40px, 6vw, 80px);
-        line-height: 1.05;
-        margin: 0 0 10px;
-      }
-      h2 {
-        font-size: clamp(28px, 4vw, 42px);
-        line-height: 1.1;
-        margin: 0 0 18px;
-      }
-      h3 {
-        font-size: 22px;
-        margin: 0 0 8px;
-      }
-      .muted {
-        color: var(--muted);
-      }
-      .center {
-        text-align: center;
-      }
-      .mb-18 {
-        margin-bottom: 18px;
-      }
-      .mb-22 {
-        margin-bottom: 22px;
-      }
-      .mb-26 {
-        margin-bottom: 26px;
-      }
-      .semibold {
-        font-weight: 600;
-      }
-      .ink {
-        color: var(--ink);
-      }
-      .bg-2 {
-        background: var(--bg-2);
-      }
-
-      .card {
-        background: var(--elev);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-      }
-      .card.pad {
-        padding: 28px;
-      }
-      .pill {
-        display: inline-block;
-        padding: 9px 14px;
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        font-size: 12px;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        min-height: 44px;
-        padding: 12px 18px;
-        border-radius: 999px;
-        border: 1px solid transparent;
-        background: transparent;
-        color: var(--ink);
-        font-weight: 700;
-        cursor: pointer;
-        transition:
-          transform 0.15s ease,
-          background-color 0.2s ease,
-          border-color 0.2s ease;
-      }
-      .btn:focus-visible {
-        outline: none;
-        box-shadow: var(--focus);
-      }
-      .btn-primary {
-        background: var(--blue);
-        color: #fff;
-      }
-      .btn-primary:hover {
-        transform: translateY(-1px);
-        background: var(--blue-2);
-      }
-      .btn-ghost {
-        border-color: var(--border);
-        background: color-mix(in oklab, var(--bg) 86%, var(--ink) 6%);
-      }
-      .btn-ghost:hover {
-        transform: translateY(-1px);
-      }
-      .cta-large {
-        font-size: 20px;
-        min-height: 56px;
-        padding: 16px 28px;
-      }
-      .cta-wrap {
-        display: flex;
-        justify-content: center;
-        margin-top: 28px;
-      }
-      .cta-full {
-        width: min(560px, 92vw);
-      }
-
-      /* NAV */
-      .nav {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background: color-mix(in oklab, var(--bg) 92%, transparent);
-        backdrop-filter: saturate(180%) blur(14px);
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: var(--nav-h);
-      }
-      .brand {
-        color: inherit;
-        text-decoration: none;
-        font-weight: 800;
-      }
-      .nav a:hover,
-      .nav a:focus-visible {
-        text-decoration: none;
-      }
-      .nav-desktop {
-        display: flex;
-      }
-      .nav-links {
-        display: flex;
-        gap: 8px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      .link {
-        padding: 8px 12px;
-        border-radius: 8px;
-      }
-      .link:hover {
-        background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
-      }
-      .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .theme-toggle {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        padding: 6px 10px;
-        cursor: pointer;
-        background: var(--elev);
-      }
-      .theme-toggle input {
-        appearance: none;
-        width: 34px;
-        height: 20px;
-        border-radius: 999px;
-        background: color-mix(in oklab, var(--bg-2) 60%, var(--ink) 8%);
-        position: relative;
-        outline: none;
-        border: 1px solid var(--border-strong);
-      }
-      .theme-toggle input:before {
-        content: "";
-        position: absolute;
-        inset: 2px auto auto 2px;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: var(--ink);
-        transition:
-          transform 0.2s ease,
-          background 0.2s ease;
-      }
-      .theme-toggle input:checked:before {
-        transform: translateX(14px);
-        background: #fff;
-      }
-      .menu-toggle {
-        display: none;
-        border: 1px solid var(--border);
-        background: var(--elev);
-        border-radius: 10px;
-        padding: 8px;
-        cursor: pointer;
-      }
-      /* Mobile drawer */
-      .nav-mobile {
-        display: none;
-        flex-direction: column;
-        padding: 10px 22px 16px;
-        gap: 8px;
-        border-top: 1px solid var(--border);
-        background: var(--elev);
-      }
-      .nav-mobile.open {
-        display: flex;
-        animation: slideDown 0.18s ease;
-      }
-      .m-link {
-        padding: 10px;
-        border-radius: 8px;
-        color: inherit;
-        text-decoration: none;
-      }
-      .m-link:hover {
-        background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
-      }
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateY(-6px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @media (max-width: 768px) {
-        .nav-desktop {
-          display: none;
-        }
-        .menu-toggle {
-          display: inline-flex;
-        }
-      }
-
-      /* KPI */
-      .kpi-header {
-        text-align: center;
-        background: var(--bg-2);
-        border-bottom: 1px solid var(--border);
-      }
-      .kpi-header .sub {
-        max-width: 560px;
-        margin: 6px auto 0;
-      }
-      .kpi {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        background: var(--elev);
-      }
-      .kpi > div {
-        padding: 30px;
-        text-align: center;
-        border-right: 1px solid var(--border);
-      }
-      .kpi > div:last-child {
-        border-right: 0;
-      }
-      .kpi-mid {
-        border-left: 1px solid var(--border);
-        border-right: 1px solid var(--border);
-      }
-      .kpi .label {
-        letter-spacing: 0.16em;
-        font-weight: 700;
-      }
-      .kpi .kpi-num {
-        font-size: 40px;
-        font-weight: 700;
-      }
-      @media (max-width: 900px) {
-        .kpi {
-          grid-template-columns: 1fr;
-        }
-        .kpi > div {
-          border-right: 0;
-          border-bottom: 1px solid var(--border);
-        }
-        .kpi > div:last-child {
-          border-bottom: 0;
-        }
-        .kpi-mid {
-          border-left: 0;
-          border-right: 0;
-        }
-      }
-
-      /* HERO full-screen */
-      .hero {
-        padding: 0;
-      }
-      .hero-banner {
-        position: relative;
-        width: 100vw;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        background: var(--bg-2);
-      }
-      .hero-media {
-        width: 100%;
-        height: calc(100dvh - var(--nav-h));
-        height: calc(100svh - var(--nav-h));
-        height: calc(100vh - var(--nav-h));
-        min-height: 480px;
-        position: relative;
-        overflow: hidden;
-      }
-      .hero-media img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        display: block;
-        opacity: 0;
-        animation: fadeIn 0.6s ease 0.05s forwards;
-        filter: brightness(0.5);
-      }
-      .hero-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.45),
-          rgba(0, 0, 0, 0.25) 40%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-      .hero-content {
-        position: absolute;
-        left: 50%;
-        bottom: 6%;
-        transform: translateX(-50%);
-        width: min(1100px, 92vw);
-        color: #fff;
-        text-align: center;
-        padding: 0 22px;
-        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
-      }
-      .hero-title {
-        font-size: clamp(36px, 6vw, 72px);
-        line-height: 1.05;
-        margin: 0 0 10px;
-      }
-      .hero-sub {
-        font-size: clamp(16px, 2.8vw, 22px);
-        opacity: 0.9;
-        margin: 0 0 18px;
-      }
-      .hero-actions {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      @keyframes fadeIn {
-        to {
-          opacity: 1;
-        }
-      }
-
-      /* Tickets */
-      .tickets-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 24px;
-      }
-      @media (max-width: 1024px) {
-        .tickets-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 20px;
-        }
-      }
-      @media (max-width: 640px) {
-        .tickets-grid {
-          grid-template-columns: 1fr;
-          gap: 16px;
-        }
-      }
-
-      .ticket-option {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        border-radius: var(--radius-lg);
-        border: 1.5px solid var(--border);
-        background: var(--elev);
-        padding: 20px;
-        transition:
-          transform 0.15s ease,
-          box-shadow 0.2s ease;
-      }
-      .ticket-option:hover {
-        transform: translateY(-1px);
-        box-shadow: var(--shadow-lg);
-      }
-
-      /* MOBILE-LIKE STACK ON ALL BREAKPOINTS */
-      .ticket-row {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-        min-width: 0;
-      }
-      .ticket-title {
-        font-weight: 800;
-        font-size: clamp(18px, 2.1vw, 22px);
-        line-height: 1.2;
-        overflow-wrap: anywhere;
-        text-wrap: balance; /* tránh tràn chữ dài */
-      }
-      .ticket-price {
-        font-weight: 800;
-        line-height: 1.1;
-        font-size: clamp(24px, 4vw, 36px);
-        white-space: normal; /* cho phép xuống dòng nếu cần */
-      }
-      .ticket-price .unit {
-        white-space: nowrap;
-      } /* giữ VNĐ dính số */
-
-      .ticket-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 1;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        color: #fff;
-        background: var(--blue);
-        padding: 4px 10px;
-        border-radius: 999px;
-      }
-
-      .benefits {
-        margin-top: 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        background: var(--bg-2);
-        padding: 12px;
-        border-radius: 12px;
-      }
-      .benefits li {
-        list-style: none;
-        display: flex;
-        gap: 8px;
-        align-items: flex-start;
-      }
-      .dot {
-        inline-size: 16px;
-        block-size: 16px;
-        border-radius: 50%;
-        background: var(--ink);
-        color: #fff;
-        display: grid;
-        place-items: center;
-        font-size: 11px;
-      }
-      html[data-theme="dark"] .ticket-option {
-        background: var(--elev);
-        border-color: var(--border);
-      }
-      html[data-theme="dark"] .benefits {
-        background: color-mix(in oklab, var(--bg) 85%, var(--ink) 6%);
-      }
-
-      /* Schedule */
-      .schedule .row {
-        display: grid;
-        grid-template-columns: 120px 1fr;
-        gap: 16px;
-        padding: 20px;
-        border-bottom: 1px solid var(--border);
-      }
-      .schedule time {
-        font-size: 22px;
-        font-weight: 700;
-      }
-      @media (max-width: 700px) {
-        .schedule .row {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* Footer */
-      .site-footer {
-        background: var(--footer-bg);
-        color: var(--footer-fg);
-      }
-      .site-footer a {
-        color: var(--footer-fg);
-        text-decoration: none;
-      }
-      .site-footer a:hover,
-      .site-footer a:focus-visible {
-        text-decoration: underline;
-      }
-      .site-footer .muted {
-        color: var(--footer-muted);
-      }
-      .site-footer hr {
-        border: none;
-        border-top: 1px solid var(--footer-border);
-        margin: 24px 0;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          transition: none !important;
-          animation: none !important;
-          scroll-behavior: auto;
-        }
-        .hero-media img {
-          opacity: 1 !important;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- NAVBAR -->
-    <header class="nav">
-      <div class="container nav-inner">
-        <a href="#" class="brand">VTuber Event</a>
-
-        <nav aria-label="Main" class="nav-desktop">
-          <ul class="nav-links">
-            <li><a class="link" href="#event">Sự kiện</a></li>
-            <li><a class="link" href="#tickets">Vé</a></li>
-            <li><a class="link" href="#schedule">Lịch trình</a></li>
-          </ul>
-        </nav>
-
-        <div class="nav-actions">
-          <label class="theme-toggle" title="Chuyển giao diện">
-            <span class="muted" aria-hidden="true">🌞</span>
-            <input id="themeSwitch" type="checkbox" aria-label="Dark mode" />
-            <span class="muted" aria-hidden="true">🌚</span>
-          </label>
-          <button
-            class="menu-toggle"
-            id="menuBtn"
-            aria-label="Mở menu"
-            aria-expanded="false"
-            aria-controls="mobileMenu"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M3 6h18M3 12h18M3 18h18"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <nav id="mobileMenu" class="nav-mobile" aria-label="Mobile">
-        <a class="m-link" href="#event">Sự kiện</a>
-        <a class="m-link" href="#tickets">Vé</a>
-        <a class="m-link" href="#schedule">Lịch trình</a>
-      </nav>
-    </header>
-
-    <main id="main">
-      <!-- HERO FULL SCREEN -->
-      <section class="hero" aria-label="Hero">
-        <div class="hero-banner">
-          <div class="hero-media">
-            <!-- THAY URL ảnh banner ở đây -->
-            <img
-              src="https://media.discordapp.net/attachments/1042324690393374820/1404050776677941279/hero.webp?ex=6899c7af&is=6898762f&hm=625454a7939e517132d85631a2451637447d3c6120642c5383d9c61142f3614c&=&format=webp"
-              alt="VTuber Offline Event banner"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-              <h1 class="hero-title">VTuber Offline Event</h1>
-              <p class="hero-sub">
-                Thành phố Hồ Chí Minh 2024 — Talk show, mini games, meet &amp;
-                greet, quà độc quyền.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary cta-large" href="#tickets"
-                  >Mua vé ngay</a
-                >
-                <a class="btn btn-ghost cta-large" href="#event"
-                  >Tìm hiểu thêm</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- EVENT INFO -->
-      <section id="event" class="section" aria-label="Thông tin sự kiện">
-        <div class="container">
-          <div class="card" style="overflow: hidden">
-            <div class="card pad kpi-header">
-              <span class="pill">OFFLINE EVENT 2024</span>
-              <h3>VTuber Meet &amp; Greet</h3>
-              <p class="muted sub">
-                Gặp gỡ trực tiếp với các VTuber nổi tiếng.
-              </p>
-            </div>
-            <div class="kpi">
-              <div>
-                <div class="kpi-num">15</div>
-                <div class="muted">
-                  Tháng 12, 2024 — CN<br /><strong class="ink"
-                    >9:00–18:00</strong
-                  >
-                </div>
-              </div>
-              <div class="kpi-mid">
-                <div class="muted label">ĐỊA ĐIỂM</div>
-                <h3>Trung tâm Hội nghị</h3>
-                <p class="muted">Quận 1, TP.HCM</p>
-              </div>
-              <div>
-                <div class="kpi-num">500</div>
-                <div class="muted">
-                  Sức chứa tối đa — <strong class="ink">Số lượng có hạn</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TICKETS -->
-      <section id="tickets" class="section" aria-label="Các gói vé">
-        <div class="container tickets">
-          <h2 class="center mb-18">Các gói vé</h2>
-          <p class="muted center mb-26">
-            Chọn loại vé & thanh toán sẽ thực hiện ở trang mua vé.
-          </p>
-
-          <div class="tickets-grid" aria-label="Các gói vé">
-            <article class="ticket-option">
-              <div class="ticket-row">
-                <div class="ticket-title">Vé Thường</div>
-                <div class="ticket-price">
-                  299.000&nbsp;<span class="muted semibold unit">VNĐ</span>
-                </div>
-              </div>
-              <ul class="benefits" aria-label="Quyền lợi">
-                <li><span class="dot">✓</span><span>Tham dự sự kiện</span></li>
-                <li><span class="dot">✓</span><span>Gặp gỡ VTuber</span></li>
-                <li><span class="dot">✓</span><span>Quà lưu niệm</span></li>
-                <li><span class="dot">✓</span><span>Ăn uống miễn phí</span></li>
-              </ul>
-            </article>
-
-            <article class="ticket-option">
-              <span class="ticket-badge">Phổ biến</span>
-              <div class="ticket-row">
-                <div class="ticket-title">Vé VIP</div>
-                <div class="ticket-price">
-                  599.000&nbsp;<span class="muted semibold unit">VNĐ</span>
-                </div>
-              </div>
-              <ul class="benefits" aria-label="Quyền lợi">
-                <li>
-                  <span class="dot">✓</span
-                  ><span>Tất cả quyền lợi vé thường</span>
-                </li>
-                <li>
-                  <span class="dot">✓</span
-                  ><span>Chụp ảnh riêng với VTuber</span>
-                </li>
-                <li>
-                  <span class="dot">✓</span><span>Quà VIP độc quyền</span>
-                </li>
-                <li><span class="dot">✓</span><span>Chỗ ngồi ưu tiên</span></li>
-              </ul>
-            </article>
-
-            <article class="ticket-option">
-              <div class="ticket-row">
-                <div class="ticket-title">Vé Premium</div>
-                <div class="ticket-price">
-                  999.000&nbsp;<span class="muted semibold unit">VNĐ</span>
-                </div>
-              </div>
-              <ul class="benefits" aria-label="Quyền lợi">
-                <li>
-                  <span class="dot">✓</span><span>Tất cả quyền lợi vé VIP</span>
-                </li>
-                <li>
-                  <span class="dot">✓</span
-                  ><span>Meet &amp; Greet riêng tư</span>
-                </li>
-                <li>
-                  <span class="dot">✓</span><span>Ký tặng độc quyền</span>
-                </li>
-                <li>
-                  <span class="dot">✓</span><span>Goodie bag cao cấp</span>
-                </li>
-              </ul>
-            </article>
-          </div>
-
-          <div class="cta-wrap">
-            <a class="btn btn-primary cta-large cta-full" href="/mua-ve"
-              >Mua vé</a
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- SCHEDULE -->
-      <section id="schedule" class="section bg-2" aria-label="Lịch trình">
-        <div class="container">
-          <h2 class="center mb-22">Lịch trình sự kiện</h2>
-          <div class="card">
-            <div class="schedule">
-              <div class="row">
-                <time datetime="2024-12-15T09:00:00+07:00">09:00</time>
-                <div>
-                  <h3>Khai mạc</h3>
-                  <p class="muted">Chào mừng &amp; Giới thiệu</p>
-                </div>
-              </div>
-              <div class="row">
-                <time datetime="2024-12-15T10:30:00+07:00">10:30</time>
-                <div>
-                  <h3>Talk Show</h3>
-                  <p class="muted">Trò chuyện với VTuber</p>
-                </div>
-              </div>
-              <div class="row">
-                <time datetime="2024-12-15T12:00:00+07:00">12:00</time>
-                <div>
-                  <h3>Nghỉ trưa</h3>
-                  <p class="muted">Ăn uống &amp; Networking</p>
-                </div>
-              </div>
-              <div class="row">
-                <time datetime="2024-12-15T14:00:00+07:00">14:00</time>
-                <div>
-                  <h3>Mini Games</h3>
-                  <p class="muted">Hoạt động tương tác</p>
-                </div>
-              </div>
-              <div class="row">
-                <time datetime="2024-12-15T16:00:00+07:00">16:00</time>
-                <div>
-                  <h3>Meet &amp; Greet</h3>
-                  <p class="muted">Chụp ảnh &amp; Ký tặng</p>
-                </div>
-              </div>
-              <div class="row" style="border-bottom: 0">
-                <time datetime="2024-12-15T17:30:00+07:00">17:30</time>
-                <div>
-                  <h3>Bế mạc</h3>
-                  <p class="muted">Tổng kết &amp; Trao giải</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="section site-footer" aria-label="Footer">
-      <div class="container center">
-        <h3 style="margin: 0 0 6px">VTuber Event HCM</h3>
-        <p class="muted">Sự kiện VTuber offline đầu tiên tại TP.HCM</p>
-        <hr />
-        <nav
-          aria-label="Mạng xã hội"
-          style="
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-          "
-        >
-          <a href="#" rel="noopener">Facebook</a>
-          <a href="#" rel="noopener">Instagram</a>
-          <a href="#" rel="noopener">Twitter</a>
-          <a href="#" rel="noopener">YouTube</a>
-        </nav>
-        <hr />
-        <small class="muted"
-          >© 2024 VTuber Event HCM. All rights reserved.</small
-        >
-      </div>
-    </footer>
-
-    <script>
-      // Theme toggle
-      const htmlEl = document.documentElement;
-      const themeSwitch = document.getElementById("themeSwitch");
-      const saved = localStorage.getItem("theme");
-      if (saved) {
-        htmlEl.setAttribute("data-theme", saved);
-        if (themeSwitch) themeSwitch.checked = saved === "dark";
-      }
-      if (themeSwitch) {
-        themeSwitch.addEventListener("change", () => {
-          const mode = themeSwitch.checked ? "dark" : "light";
-          htmlEl.setAttribute("data-theme", mode);
-          localStorage.setItem("theme", mode);
-        });
-      }
-
-      // Mobile menu
-      const menuBtn = document.getElementById("menuBtn");
-      const mobileMenu = document.getElementById("mobileMenu");
-      if (menuBtn && mobileMenu) {
-        const closeMenu = () => {
-          mobileMenu.classList.remove("open");
-          menuBtn.setAttribute("aria-expanded", "false");
-        };
-        menuBtn.addEventListener("click", () => {
-          const open = mobileMenu.classList.toggle("open");
-          menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-        });
-        mobileMenu
-          .querySelectorAll("a")
-          .forEach((a) => a.addEventListener("click", closeMenu));
-        document.addEventListener("click", (e) => {
-          if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
-            closeMenu();
-          }
-        });
-      }
-
-      // Smooth scroll for in-page links
-      document.querySelectorAll('a[href^="#"]').forEach((a) => {
-        a.addEventListener("click", (e) => {
-          const id = a.getAttribute("href");
-          if (id && id.length > 1) {
-            const el = document.querySelector(id);
-            if (el) {
-              e.preventDefault();
-              el.scrollIntoView({ behavior: "smooth", block: "start" });
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>OFFLINE HOLOLIVE TOGETHER, WE SIMP</title>
+        <meta
+            name="description"
+            content="Sự kiện offline Hololive tại TP.HCM."
+        />
+        <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+            crossorigin
+        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --ink: #1d1d1f;
+                --muted: #6e6e73;
+                --bg: #ffffff;
+                --bg-2: #f5f5f7;
+                --elev: #ffffff;
+                --blue: #007aff;
+                --blue-2: #0051d5;
+                --border: rgba(0, 0, 0, 0.12);
+                --border-strong: rgba(0, 0, 0, 0.18);
+                --radius: 12px;
+                --radius-lg: 20px;
+                --shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+                --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.14);
+                --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 60%, white);
+                --link: #0a84ff;
+                --footer-bg: #121215;
+                --footer-fg: #ffffff;
+                --footer-muted: #c9c9cf;
+                --footer-border: rgba(255, 255, 255, 0.18);
+                --nav-h: 60px;
             }
-          }
-        });
-      });
-    </script>
-  </body>
+            html[data-theme="dark"] {
+                --ink: #f5f5f7;
+                --muted: #b7b7bd;
+                --bg: #0b0b0c;
+                --bg-2: #111114;
+                --elev: #121215;
+                --blue: #0a84ff;
+                --blue-2: #0066cc;
+                --border: rgba(255, 255, 255, 0.14);
+                --border-strong: rgba(255, 255, 255, 0.22);
+                --shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+                --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.7);
+                --focus: 0 0 0 3px color-mix(in oklab, var(--blue) 65%, black);
+                --link: #66aaff;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                margin: 0;
+                font-family:
+                    "Inter",
+                    system-ui,
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    "Segoe UI",
+                    Arial;
+                background: var(--bg);
+                color: var(--ink);
+                line-height: 1.55;
+                letter-spacing: -0.01em;
+                text-rendering: optimizeLegibility;
+                overflow-x: hidden;
+            }
+            a {
+                color: var(--link);
+                text-decoration: none;
+            }
+            a:hover,
+            a:focus-visible {
+                text-decoration: underline;
+            }
+            .container {
+                max-width: 1100px;
+                margin: auto;
+                padding: 0 22px;
+            }
+            .section {
+                padding: 72px 0;
+            }
+            h1 {
+                font-size: clamp(40px, 6vw, 80px);
+                line-height: 1.05;
+                margin: 0 0 10px;
+            }
+            h2 {
+                font-size: clamp(28px, 4vw, 42px);
+                line-height: 1.1;
+                margin: 0 0 18px;
+            }
+            h3 {
+                font-size: 22px;
+                margin: 0 0 8px;
+            }
+            .muted {
+                color: var(--muted);
+            }
+            .center {
+                text-align: center;
+            }
+            .mb-18 {
+                margin-bottom: 18px;
+            }
+            .mb-22 {
+                margin-bottom: 22px;
+            }
+            .mb-26 {
+                margin-bottom: 26px;
+            }
+            .semibold {
+                font-weight: 600;
+            }
+            .ink {
+                color: var(--ink);
+            }
+            .bg-2 {
+                background: var(--bg-2);
+            }
+
+            .card {
+                background: var(--elev);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                box-shadow: var(--shadow);
+            }
+            .card.pad {
+                padding: 28px;
+            }
+            .pill {
+                display: inline-block;
+                padding: 9px 14px;
+                border: 1px solid var(--border);
+                border-radius: 999px;
+                font-size: 12px;
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                min-height: 44px;
+                padding: 12px 18px;
+                border-radius: 999px;
+                border: 1px solid transparent;
+                background: transparent;
+                color: var(--ink);
+                font-weight: 700;
+                cursor: pointer;
+                transition:
+                    transform 0.15s ease,
+                    background-color 0.2s ease,
+                    border-color 0.2s ease;
+            }
+            .btn:focus-visible {
+                outline: none;
+                box-shadow: var(--focus);
+            }
+            .btn-primary {
+                background: var(--blue);
+                color: #fff;
+            }
+            .btn-primary:hover {
+                transform: translateY(-1px);
+                background: var(--blue-2);
+            }
+            .btn-ghost {
+                border-color: var(--border);
+                background: color-mix(in oklab, var(--bg) 86%, var(--ink) 6%);
+            }
+            .btn-ghost:hover {
+                transform: translateY(-1px);
+            }
+            .cta-large {
+                font-size: 20px;
+                min-height: 56px;
+                padding: 16px 28px;
+            }
+            .cta-wrap {
+                display: flex;
+                justify-content: center;
+                margin-top: 28px;
+            }
+            .cta-full {
+                width: min(560px, 92vw);
+            }
+
+            /* NAV */
+            .nav {
+                position: sticky;
+                top: 0;
+                z-index: 20;
+                background: color-mix(in oklab, var(--bg) 92%, transparent);
+                backdrop-filter: saturate(180%) blur(14px);
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-inner {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: var(--nav-h);
+            }
+            .brand {
+                color: inherit;
+                text-decoration: none;
+                font-weight: 800;
+            }
+            .nav a:hover,
+            .nav a:focus-visible {
+                text-decoration: none;
+            }
+            .nav-desktop {
+                display: flex;
+            }
+            .nav-links {
+                display: flex;
+                gap: 8px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            .link {
+                padding: 8px 12px;
+                border-radius: 8px;
+            }
+            .link:hover {
+                background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
+            }
+            .nav-actions {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .theme-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                border: 1px solid var(--border);
+                border-radius: 999px;
+                padding: 6px 10px;
+                cursor: pointer;
+                background: var(--elev);
+            }
+            .theme-toggle input {
+                appearance: none;
+                width: 34px;
+                height: 20px;
+                border-radius: 999px;
+                background: color-mix(in oklab, var(--bg-2) 60%, var(--ink) 8%);
+                position: relative;
+                outline: none;
+                border: 1px solid var(--border-strong);
+            }
+            .theme-toggle input:before {
+                content: "";
+                position: absolute;
+                inset: 2px auto auto 2px;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: var(--ink);
+                transition:
+                    transform 0.2s ease,
+                    background 0.2s ease;
+            }
+            .theme-toggle input:checked:before {
+                transform: translateX(14px);
+                background: #fff;
+            }
+            .menu-toggle {
+                display: none;
+                border: 1px solid var(--border);
+                background: var(--elev);
+                border-radius: 10px;
+                padding: 8px;
+                cursor: pointer;
+            }
+            /* Mobile drawer */
+            .nav-mobile {
+                display: none;
+                flex-direction: column;
+                padding: 10px 22px 16px;
+                gap: 8px;
+                border-top: 1px solid var(--border);
+                background: var(--elev);
+            }
+            .nav-mobile.open {
+                display: flex;
+                animation: slideDown 0.18s ease;
+            }
+            .m-link {
+                padding: 10px;
+                border-radius: 8px;
+                color: inherit;
+                text-decoration: none;
+            }
+            .m-link:hover {
+                background: color-mix(in oklab, var(--bg) 82%, var(--ink) 7%);
+            }
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-6px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            @media (max-width: 768px) {
+                .nav-desktop {
+                    display: none;
+                }
+                .menu-toggle {
+                    display: inline-flex;
+                }
+            }
+
+            /* KPI */
+            .kpi-header {
+                text-align: center;
+                background: var(--bg-2);
+                border-bottom: 1px solid var(--border);
+            }
+            .kpi-header .sub {
+                max-width: 560px;
+                margin: 6px auto 0;
+            }
+            .kpi {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                background: var(--elev);
+            }
+            .kpi > div {
+                padding: 30px;
+                text-align: center;
+                border-right: 1px solid var(--border);
+            }
+            .kpi > div:last-child {
+                border-right: 0;
+            }
+            .kpi-mid {
+                border-left: 1px solid var(--border);
+                border-right: 1px solid var(--border);
+            }
+            .kpi .label {
+                letter-spacing: 0.16em;
+                font-weight: 700;
+            }
+            .kpi .kpi-num {
+                font-size: 40px;
+                font-weight: 700;
+            }
+            @media (max-width: 900px) {
+                .kpi {
+                    grid-template-columns: 1fr;
+                }
+                .kpi > div {
+                    border-right: 0;
+                    border-bottom: 1px solid var(--border);
+                }
+                .kpi > div:last-child {
+                    border-bottom: 0;
+                }
+                .kpi-mid {
+                    border-left: 0;
+                    border-right: 0;
+                }
+            }
+
+            /* HERO full-screen */
+            .hero {
+                padding: 0;
+            }
+            .hero-banner {
+                position: relative;
+                width: 100vw;
+                margin-left: 50%;
+                transform: translateX(-50%);
+                background: var(--bg-2);
+            }
+            .hero-media {
+                width: 100%;
+                height: calc(100dvh - var(--nav-h));
+                height: calc(100svh - var(--nav-h));
+                height: calc(100vh - var(--nav-h));
+                min-height: 480px;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero-media img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                display: block;
+                opacity: 0;
+                animation: fadeIn 0.6s ease 0.05s forwards;
+                filter: brightness(0.5);
+            }
+            .hero-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, 0.45),
+                    rgba(0, 0, 0, 0.25) 40%,
+                    transparent 70%
+                );
+                pointer-events: none;
+            }
+            .hero-content {
+                position: absolute;
+                left: 50%;
+                bottom: 6%;
+                transform: translateX(-50%);
+                width: min(1100px, 92vw);
+                color: #fff;
+                text-align: center;
+                padding: 0 22px;
+                text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+            }
+            .hero-title {
+                font-size: clamp(36px, 6vw, 72px);
+                line-height: 1.05;
+                margin: 0 0 10px;
+            }
+            .hero-sub {
+                font-size: clamp(16px, 2.8vw, 22px);
+                opacity: 0.9;
+                margin: 0 0 18px;
+            }
+            .hero-actions {
+                display: flex;
+                gap: 12px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            @keyframes fadeIn {
+                to {
+                    opacity: 1;
+                }
+            }
+
+            /* Tickets */
+            .tickets-grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 24px;
+            }
+            @media (max-width: 1024px) {
+                .tickets-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 20px;
+                }
+            }
+            @media (max-width: 640px) {
+                .tickets-grid {
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                }
+            }
+
+            .ticket-option {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                border-radius: var(--radius-lg);
+                border: 1.5px solid var(--border);
+                background: var(--elev);
+                padding: 20px;
+                transition:
+                    transform 0.15s ease,
+                    box-shadow 0.2s ease;
+            }
+            .ticket-option:hover {
+                transform: translateY(-1px);
+                box-shadow: var(--shadow-lg);
+            }
+
+            /* MOBILE-LIKE STACK ON ALL BREAKPOINTS */
+            .ticket-row {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+                min-width: 0;
+            }
+            .ticket-title {
+                font-weight: 800;
+                font-size: clamp(18px, 2.1vw, 22px);
+                line-height: 1.2;
+                overflow-wrap: anywhere;
+                text-wrap: balance; /* tránh tràn chữ dài */
+            }
+            .ticket-price {
+                font-weight: 800;
+                line-height: 1.1;
+                font-size: clamp(24px, 4vw, 36px);
+                white-space: normal; /* cho phép xuống dòng nếu cần */
+            }
+            .ticket-price .unit {
+                white-space: nowrap;
+            } /* giữ VNĐ dính số */
+
+            .ticket-badge {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                z-index: 1;
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                color: #fff;
+                background: var(--blue);
+                padding: 4px 10px;
+                border-radius: 999px;
+            }
+
+            .benefits {
+                margin-top: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                background: var(--bg-2);
+                padding: 12px;
+                border-radius: 12px;
+            }
+            .benefits li {
+                list-style: none;
+                display: flex;
+                gap: 8px;
+                align-items: flex-start;
+            }
+            .dot {
+                inline-size: 16px;
+                block-size: 16px;
+                border-radius: 50%;
+                background: var(--ink);
+                color: #fff;
+                display: grid;
+                place-items: center;
+                font-size: 11px;
+            }
+            html[data-theme="dark"] .ticket-option {
+                background: var(--elev);
+                border-color: var(--border);
+            }
+            html[data-theme="dark"] .benefits {
+                background: color-mix(in oklab, var(--bg) 85%, var(--ink) 6%);
+            }
+
+            /* Schedule */
+            .schedule .row {
+                display: grid;
+                grid-template-columns: 120px 1fr;
+                gap: 16px;
+                padding: 20px;
+                border-bottom: 1px solid var(--border);
+            }
+            .schedule time {
+                font-size: 22px;
+                font-weight: 700;
+            }
+            @media (max-width: 700px) {
+                .schedule .row {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* Footer */
+            .site-footer {
+                background: var(--footer-bg);
+                color: var(--footer-fg);
+            }
+            .site-footer a {
+                color: var(--footer-fg);
+                text-decoration: none;
+            }
+            .site-footer a:hover,
+            .site-footer a:focus-visible {
+                text-decoration: underline;
+            }
+            .site-footer .muted {
+                color: var(--footer-muted);
+            }
+            .site-footer hr {
+                border: none;
+                border-top: 1px solid var(--footer-border);
+                margin: 24px 0;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    transition: none !important;
+                    animation: none !important;
+                    scroll-behavior: auto;
+                }
+                .hero-media img {
+                    opacity: 1 !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- NAVBAR -->
+        <header class="nav">
+            <div class="container nav-inner">
+                <img
+                    src="./assets/images/logo.png"
+                    alt="Worldsimp logo"
+                    width="75"
+                    height="40"
+                    style="margin-right: 8px"
+                />
+                <nav aria-label="Main" class="nav-desktop">
+                    <ul class="nav-links">
+                        <li><a class="link" href="#event">Sự kiện</a></li>
+                        <li><a class="link" href="#tickets">Vé</a></li>
+                        <li><a class="link" href="#schedule">Lịch trình</a></li>
+                    </ul>
+                </nav>
+
+                <div class="nav-actions">
+                    <label class="theme-toggle" title="Chuyển giao diện">
+                        <span class="muted" aria-hidden="true">🌞</span>
+                        <input
+                            id="themeSwitch"
+                            type="checkbox"
+                            aria-label="Dark mode"
+                        />
+                        <span class="muted" aria-hidden="true">🌚</span>
+                    </label>
+                    <button
+                        class="menu-toggle"
+                        id="menuBtn"
+                        aria-label="Mở menu"
+                        aria-expanded="false"
+                        aria-controls="mobileMenu"
+                    >
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            aria-hidden="true"
+                        >
+                            <path
+                                d="M3 6h18M3 12h18M3 18h18"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <nav id="mobileMenu" class="nav-mobile" aria-label="Mobile">
+                <a class="m-link" href="#event">Sự kiện</a>
+                <a class="m-link" href="#tickets">Vé</a>
+                <a class="m-link" href="#schedule">Lịch trình</a>
+            </nav>
+        </header>
+
+        <main id="main">
+            <!-- HERO FULL SCREEN -->
+            <section class="hero" aria-label="Hero">
+                <div class="hero-banner">
+                    <div class="hero-media">
+                        <!-- THAY URL ảnh banner ở đây -->
+                        <img
+                            src="./assets/images/banner.webp"
+                            alt="VTuber Offline Event banner"
+                            loading="eager"
+                            fetchpriority="high"
+                            decoding="async"
+                        />
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <h1 class="hero-title">
+                                OFFLINE HOLOLIVE TOGETHER, WE SIMP
+                            </h1>
+                            <p class="hero-sub">Thành phố Hồ Chí Minh 2025.</p>
+                            <div class="hero-actions">
+                                <a
+                                    class="btn btn-primary cta-large"
+                                    href="#tickets"
+                                    >Mua vé ngay</a
+                                >
+                                <a class="btn btn-ghost cta-large" href="#event"
+                                    >Tìm hiểu thêm</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EVENT INFO -->
+            <section id="event" class="section" aria-label="Thông tin sự kiện">
+                <div class="container">
+                    <div class="card" style="overflow: hidden">
+                        <div class="card pad kpi-header">
+                            <span class="pill">OFFLINE HOLOLIVE</span>
+                            <h3>Together, We Simp</h3>
+                            <p class="muted sub">Nơi các con Simp gặp nhau.</p>
+                        </div>
+                        <div class="kpi">
+                            <div>
+                                <div class="kpi-num">5</div>
+                                <div class="muted">
+                                    Tháng 10, 2025 — CN<br /><strong class="ink"
+                                        >9:00–16:00</strong
+                                    >
+                                </div>
+                            </div>
+                            <div class="kpi-mid">
+                                <div class="muted label">ĐỊA ĐIỂM</div>
+                                <h3>Mcafé</h3>
+                                <p class="muted">
+                                    40 Nguyễn Văn Hưởng, Thảo Điền, Thủ Đức, TP.
+                                    HCM
+                                </p>
+                            </div>
+                            <div>
+                                <div class="muted label">NHÀ TÀI TRỢ</div>
+                                <img
+                                    src="./assets/images/peopo.webp"
+                                    alt="peopo logo"
+                                    style="
+                                        max-height: 100px;
+                                        height: auto;
+                                        width: auto;
+                                    "
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TICKETS -->
+            <section id="tickets" class="section" aria-label="Các gói vé">
+                <div class="container tickets">
+                    <h2 class="center mb-18">Các gói vé</h2>
+                    <p class="muted center mb-26">
+                        Chọn loại vé & thanh toán sẽ thực hiện ở trang mua vé.
+                    </p>
+
+                    <div class="tickets-grid" aria-label="Các gói vé">
+                        <article class="ticket-option">
+                            <div class="ticket-row">
+                                <div class="ticket-title">Simp</div>
+                                <div class="ticket-price">
+                                    119.000&nbsp;<span
+                                        class="muted semibold unit"
+                                        >VNĐ</span
+                                    >
+                                </div>
+                            </div>
+                            <ul class="benefits" aria-label="Quyền lợi">
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 vé vật lý</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 huy hiệu</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>Unlimited nước</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article class="ticket-option">
+                            <span class="ticket-badge">Phổ biến</span>
+                            <div class="ticket-row">
+                                <div class="ticket-title">Simp Premium</div>
+                                <div class="ticket-price">
+                                    189.000&nbsp;<span
+                                        class="muted semibold unit"
+                                        >VNĐ</span
+                                    >
+                                </div>
+                            </div>
+                            <ul class="benefits" aria-label="Quyền lợi">
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 vé vật lý</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 huy hiệu</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 móc khóa</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>Random 1 trong 3 dây đeo</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>Random 1 sticker</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span
+                                        >Random 1 móc khóa / mini standee</span
+                                    >
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>Unlimited nước</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <article class="ticket-option">
+                            <div class="ticket-row">
+                                <div class="ticket-title">Simp Elite</div>
+                                <div class="ticket-price">
+                                    279.000&nbsp;<span
+                                        class="muted semibold unit"
+                                        >VNĐ</span
+                                    >
+                                </div>
+                            </div>
+                            <ul class="benefits" aria-label="Quyền lợi">
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 vé vật lý</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 huy hiệu</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 móc khóa</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>Random 1 trong 3 dây đeo</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>1 artprint</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span
+                                        >Random 2 mini standee / móc khóa</span
+                                    >
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>Random 2 / 3 sticker</span>
+                                </li>
+                                <li>
+                                    <span class="dot">✓</span
+                                    ><span>Unlimited nước</span>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <div class="cta-wrap">
+                        <a
+                            class="btn btn-primary cta-large cta-full"
+                            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
+                            >Mua vé</a
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCHEDULE -->
+            <section id="schedule" class="section bg-2" aria-label="Lịch trình">
+                <div class="container">
+                    <h2 class="center mb-22">Lịch trình sự kiện</h2>
+                    <div class="card">
+                        <div class="schedule">
+                            <!-- 09:00 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T09:00:00+07:00"
+                                    >09:00</time
+                                >
+                                <div>
+                                    <h3>Mở cửa – Khai mạc</h3>
+                                    <p class="muted">
+                                        Chào mừng &amp; Giới thiệu • Giao lưu
+                                        chung
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 09:30 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T09:30:00+07:00"
+                                    >09:30</time
+                                >
+                                <div>
+                                    <h3>Văn Nghệ</h3>
+                                    <p class="muted">
+                                        Tiết mục mở màn, giao lưu
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 10:30 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T10:30:00+07:00"
+                                    >10:30</time
+                                >
+                                <div>
+                                    <h3>Talkshow</h3>
+                                    <p class="muted">Trò chuyện • Q&amp;A</p>
+                                </div>
+                            </div>
+
+                            <!-- 11:00 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T11:00:00+07:00"
+                                    >11:00</time
+                                >
+                                <div>
+                                    <h3>Karaoke cùng khách mời</h3>
+                                    <p class="muted">Sân khấu mở</p>
+                                </div>
+                            </div>
+
+                            <!-- 11:30 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T11:30:00+07:00"
+                                    >11:30</time
+                                >
+                                <div>
+                                    <h3>Đoán Nhân Vật cùng khách mời</h3>
+                                    <p class="muted">Đăng ký IS tại quầy</p>
+                                </div>
+                            </div>
+
+                            <!-- 12:00 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T12:00:00+07:00"
+                                    >12:00</time
+                                >
+                                <div>
+                                    <h3>Nghỉ ngơi – Chụp ảnh đầu buổi</h3>
+                                    <p class="muted">
+                                        Ăn uống • Networking • Xem Concert (song
+                                        song)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 13:00 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T13:00:00+07:00"
+                                    >13:00</time
+                                >
+                                <div>
+                                    <h3>Karaoke – Cuộc thi hát</h3>
+                                    <p class="muted">
+                                        Ri viu mim mở màng (10’)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 14:00 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T14:00:00+07:00"
+                                    >14:00</time
+                                >
+                                <div>
+                                    <h3>BK-CK Event Idol Showdown</h3>
+                                    <p class="muted">
+                                        Trả lời câu hỏi • Reviu góc simp
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 14:30 -->
+                            <div class="row">
+                                <time datetime="2024-12-15T14:30:00+07:00"
+                                    >14:30</time
+                                >
+                                <div>
+                                    <h3>Giao lưu cosplay</h3>
+                                    <p class="muted">
+                                        Vòng quay may mắn • Xem Concert
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 15:30 -->
+                            <div class="row" style="border-bottom: 0">
+                                <time datetime="2024-12-15T15:30:00+07:00"
+                                    >15:30</time
+                                >
+                                <div>
+                                    <h3>Chụp ảnh cuối buổi</h3>
+                                    <p class="muted">
+                                        Good gallery / holowall • Q&amp;A kết
+                                        thúc
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="section site-footer" aria-label="Footer">
+            <div class="container center">
+                <h3 style="margin: 0 0 6px">
+                    OFFLINE HOLOLIVE HCM - TOGETHER, WE SIMP
+                </h3>
+                <hr />
+                <nav
+                    aria-label="Mạng xã hội"
+                    style="
+                        display: flex;
+                        justify-content: center;
+                        gap: 20px;
+                        flex-wrap: wrap;
+                    "
+                >
+                    <a href="https://www.facebook.com/worldlotho" rel="noopener"
+                        >Facebook</a
+                    >
+                    <a href="https://youtube.com/@WorldLotHo" rel="noopener"
+                        >YouTube</a
+                    >
+                    <a href="mailto:worldsimp@urumocha.com">Support</a>
+                </nav>
+                <hr />
+                <small class="muted"
+                    >© 2025 Worldsimp. All rights reserved.</small
+                >
+            </div>
+        </footer>
+
+        <script>
+            // Theme toggle
+            const htmlEl = document.documentElement;
+            const themeSwitch = document.getElementById("themeSwitch");
+            const saved = localStorage.getItem("theme");
+            if (saved) {
+                htmlEl.setAttribute("data-theme", saved);
+                if (themeSwitch) themeSwitch.checked = saved === "dark";
+            }
+            if (themeSwitch) {
+                themeSwitch.addEventListener("change", () => {
+                    const mode = themeSwitch.checked ? "dark" : "light";
+                    htmlEl.setAttribute("data-theme", mode);
+                    localStorage.setItem("theme", mode);
+                });
+            }
+
+            // Mobile menu
+            const menuBtn = document.getElementById("menuBtn");
+            const mobileMenu = document.getElementById("mobileMenu");
+            if (menuBtn && mobileMenu) {
+                const closeMenu = () => {
+                    mobileMenu.classList.remove("open");
+                    menuBtn.setAttribute("aria-expanded", "false");
+                };
+                menuBtn.addEventListener("click", () => {
+                    const open = mobileMenu.classList.toggle("open");
+                    menuBtn.setAttribute(
+                        "aria-expanded",
+                        open ? "true" : "false",
+                    );
+                });
+                mobileMenu
+                    .querySelectorAll("a")
+                    .forEach((a) => a.addEventListener("click", closeMenu));
+                document.addEventListener("click", (e) => {
+                    if (
+                        !mobileMenu.contains(e.target) &&
+                        !menuBtn.contains(e.target)
+                    ) {
+                        closeMenu();
+                    }
+                });
+            }
+
+            // Smooth scroll for in-page links
+            document.querySelectorAll('a[href^="#"]').forEach((a) => {
+                a.addEventListener("click", (e) => {
+                    const id = a.getAttribute("href");
+                    if (id && id.length > 1) {
+                        const el = document.querySelector(id);
+                        if (el) {
+                            e.preventDefault();
+                            el.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                            });
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
 </html>
